@@ -20,14 +20,16 @@ const Graphs = () => {
   }, []);
 
   return (
-    <S.MainContainer>
+    <S.MainContainer paddingTop={"30px"}>
       <S.VerticalContainer>
         <S.Title>Graficos</S.Title>
         <S.SubTitle>O Grafico de sono</S.SubTitle>
       </S.VerticalContainer>
       <SleepTimeLineChart sleepData={sleepData} />
-      <S.SubTitle>Quem dormiu mais horas</S.SubTitle>
-      <SleepTimeBarChart sleepData={sleepData} />
+      <S.SubTitle>Horas totais dormidas</S.SubTitle>
+      <SleepTimeBarChart sleepData={sleepData} type="all" />
+      <S.SubTitle>Media de horas dormidas por dia</S.SubTitle>
+      <SleepTimeBarChart sleepData={sleepData} type="average" />
       <S.Footer></S.Footer>
     </S.MainContainer>
   );

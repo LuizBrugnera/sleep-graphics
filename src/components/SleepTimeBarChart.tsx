@@ -12,10 +12,11 @@ import { SleepDataAllPersonsDTO } from "./dto/SleepDataDto";
 
 interface SleepBarChartProps {
   sleepData: SleepDataAllPersonsDTO[];
+  type: "all" | "average";
 }
 
-export function SleepTimeBarChart({ sleepData }: SleepBarChartProps) {
-  const totalSleep = () => {
+export function SleepTimeBarChart({ sleepData, type }: SleepBarChartProps) {
+  const allSleep = () => {
     const sleepTimes = [
       "sleepTimeEverson",
       "sleepTimeGabriel",
@@ -27,22 +28,33 @@ export function SleepTimeBarChart({ sleepData }: SleepBarChartProps) {
       "sleepTimeGuilherme",
     ];
 
-    const totalSleep = sleepTimes.map((name) => {
-      const total = sleepData.reduce(
+    const allSleep = sleepTimes.map((name) => {
+      const all = sleepData.reduce(
         (acc, item) => acc + parseFloat(item[name] as string),
         0
       );
-      return { name: name.replace("sleepTime", ""), total };
+      return { name: name.replace("sleepTime", ""), all };
     });
 
-    totalSleep.sort((a, b) => b.total - a.total);
-    return totalSleep;
+    allSleep.sort((a, b) => b.all - a.all);
+    return allSleep;
   };
 
-  return (
+  const sleepAverage = () => {
+    const all = allSleep();
+
+    const average = all.map((item) => {
+      const average = item.all / sleepData.length;
+      return { name: item.name, average };
+    });
+
+    return average;
+  };
+
+  return type === "all" ? (
     <ResponsiveContainer width="100%" height={400}>
       <BarChart
-        data={totalSleep()}
+        data={allSleep()}
         margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
       >
         <CartesianGrid strokeDasharray="3 3" />
@@ -50,7 +62,21 @@ export function SleepTimeBarChart({ sleepData }: SleepBarChartProps) {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar dataKey="total" fill="#8884d8" />
+        <Bar dataKey="all" fill="#4c46c4" name="Total" />
+      </BarChart>
+    </ResponsiveContainer>
+  ) : (
+    <ResponsiveContainer width="100%" height={400}>
+      <BarChart
+        data={sleepAverage()}
+        margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+      >
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="name" />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Bar dataKey="average" fill="#be3a3a" name="Média" />
       </BarChart>
     </ResponsiveContainer>
   );

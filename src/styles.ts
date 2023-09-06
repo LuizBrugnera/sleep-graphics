@@ -69,6 +69,7 @@ ul {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     color: ${theme.colors.text.primary};
     background-color: ${theme.colors.background.secondary};
+    border: 2px solid ${theme.colors.background.secondary};
 }
 
 @media screen and (max-width: 500px) {
@@ -192,13 +193,17 @@ export const MobileAncor = styled.a`
 `;
 // home
 
-export const MainContainer = styled.div`
+interface MainContainerProps {
+  paddingTop?: string;
+}
+
+export const MainContainer = styled.div<MainContainerProps>`
   background-color: ${theme.colors.background.primary};
   color: ${theme.colors.text.primary};
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  padding: 90px 90px;
+  padding: ${(props) => props.paddingTop || "90px"} 90px;
   height: 90vh;
   width: 100%;
 
@@ -279,7 +284,7 @@ export const FormInput = styled.input`
   margin: 5px 0px;
   width: 300px;
   height: 50px;
-
+  border: 2px solid ${theme.colors.background.secondary};
   @media screen and (max-width: 500px) {
     margin: 5px 0px;
     width: 200px;
@@ -308,8 +313,8 @@ export const FormButton = styled.button`
 
   margin: 20px 0px;
   padding: 20px 40px;
-  border: 1px solid ${theme.colors.background.tertiary};
   border-radius: 5px;
+  border: 2px solid ${theme.colors.background.secondary};
 
   cursor: pointer;
   transition: all 0.3s ease-in-out;
@@ -337,6 +342,7 @@ export const FormSelect = styled.select`
   height: 50px;
   text-align: center;
   font-size: 1.2rem;
+  border: 2px solid ${theme.colors.background.secondary};
   @media screen and (max-width: 500px) {
     padding: 5px 10px;
     border-radius: 5px;

@@ -12,7 +12,7 @@ export const SleepDataService = {
   ): Promise<SleepDataDTO | undefined> => {
     try {
       const response = await axios.post(
-        `http://localhost:3005/api/v1/sleepdata`,
+        `${import.meta.env.VITE_API_URL}/sleepdata`,
         data
       );
 
@@ -32,7 +32,7 @@ export const SleepDataService = {
   getAll: async (): Promise<SleepDataDTO[] | undefined> => {
     try {
       const response = await axios.get(
-        `http://localhost:3005/api/v1/sleepdata`
+        `${import.meta.env.VITE_API_URL}/sleepdata`
       );
 
       const sleepDataList: SleepDataDTO[] = response.data.map(
@@ -55,7 +55,7 @@ export const SleepDataService = {
   getOne: async (id: string): Promise<SleepDataDTO | undefined> => {
     try {
       const response = await axios.get(
-        `http://localhost:3005/api/v1/sleepdata/${id}`
+        `${import.meta.env.VITE_API_URL}/sleepdata/${id}`
       );
 
       const sleepData: SleepDataDTO = {
@@ -77,7 +77,7 @@ export const SleepDataService = {
   ): Promise<SleepDataDTO | undefined> => {
     try {
       const response = await axios.put(
-        `http://localhost:3005/api/v1/sleepdata/${id}`,
+        `${import.meta.env.VITE_API_URL}/sleepdata/${id}`,
         data
       );
 
@@ -97,7 +97,7 @@ export const SleepDataService = {
   delete: async (id: string): Promise<boolean | undefined> => {
     try {
       const response = await axios.delete(
-        `http://localhost:3005/api/v1/sleepdata/${id}`
+        `${import.meta.env.VITE_API_URL}/sleepdata/${id}`
       );
 
       return response.status === 200 ? true : false;
@@ -111,7 +111,7 @@ export const SleepDataService = {
   > => {
     try {
       const response = await axios.get(
-        `http://localhost:3005/api/v1/sleepdata/grouped`
+        `${import.meta.env.VITE_API_URL}/sleepdata/grouped`
       );
 
       const sleepDataList: SleepDataAllPersonsDTO[] =

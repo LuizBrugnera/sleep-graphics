@@ -21,7 +21,7 @@ const Home = () => {
   }, []);
   return (
     <div>
-      <S.MainContainer>
+      <S.MainContainer paddingTop={"90px"}>
         <S.LineGraphContainer>
           <SleepTimeLineChart sleepData={sleepData} />
         </S.LineGraphContainer>
