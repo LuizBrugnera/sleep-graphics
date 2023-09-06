@@ -59,8 +59,6 @@ ul {
     width: 300px;
 }
 
-
-
 .react-datepicker__input-container input {
     width: 300px;
     height: 50px;
