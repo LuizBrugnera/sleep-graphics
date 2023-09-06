@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { SleepDataService } from "../services/SleepDataService";
 import { SleepDataAllPersonsDTO } from "../dto/SleepDataDto";
 import * as S from "../../styles";
