@@ -5,11 +5,12 @@ import Navbar from "./components/Navbar";
 function App() {
   return (
     <>
-      <Navbar />
       <Router>
+        <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/:id" element={<Graphs />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/graphs" element={<Graphs />} />
         </Routes>
       </Router>
     </>

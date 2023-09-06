@@ -7,10 +7,11 @@ export const theme = {
     background: {
       primary: "#292828",
       secondary: "#302d2d",
+      tertiary: "rgba(255, 255, 255, 0.87)",
     },
-    text: {
-      primary: "rgba(255, 255, 255, 0.87)",
-      secondary: "#ffffff",
+  text: {
+    primary: "rgba(255, 255, 255, 0.87)",
+    secondary: "#ffffff",
     },
   },
 };
@@ -54,12 +55,6 @@ ul {
 }
 `;
 
-export const Container = styled.div`
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 0 1rem;
-`;
-
 // NavBar
 
 export const Navbar = styled.nav`
@@ -70,9 +65,7 @@ export const Navbar = styled.nav`
   align-items: center;
   padding: 0px 40px;
   height: 10vh;
-  position: fixed;
   width: 100%;
-  z-index: 999;
 `;
 
 export const NavLogo = styled.h1`
@@ -100,4 +93,109 @@ export const NavLinks = styled.a`
   padding: 5px 10px;
   color: ${theme.colors.text.primary};
   transition: all 0.3s ease-in-out;
+`;
+
+export const MobileLine = styled.div`
+  width: 100%;
+  height: 4px;
+  background-color: ${theme.colors.background.tertiary};
+  transition: all 0.2s;
+`;
+
+export const MobileNavList = styled.ul`
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  background: linear-gradient(
+    to bottom,
+    ${theme.colors.background.primary},
+    ${theme.colors.background.secondary}
+  );
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+  z-index: 1;
+  padding: 20px 0px;
+  border-bottom: 1px solid #333;
+
+  list-style: none;
+`;
+
+export const MobileIcon = styled.div`
+  width: 30px;
+  height: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+
+  z-index: 5;
+`;
+
+export const MobileNavItem = styled.li`
+  min-width: 30%;
+  padding: 20px 30px;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: ${theme.colors.text.primary};
+  min-width: 150px;
+  cursor: pointer;
+  padding &:hover {
+    border-bottom: 1px solid #333;
+    color: ${theme.colors.text.secondary};
+    transition: all 2s ease-in-out;
+  }
+
+  @media (max-width: 800px) {
+    font-size: 1.2rem;
+  }
+`;
+
+export const MobileAncor = styled.a`
+  text-decoration: none;
+  color: ${theme.colors.text.primary};
+  padding: 1rem;
+`;
+// home
+
+export const HomeContainer = styled.div`
+  background-color: ${theme.colors.background.primary};
+  color: ${theme.colors.text.primary};
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 90px 90px;
+  height: 90vh;
+  width: 100%;
+
+  @media screen and (max-width: 1050px) {
+    padding: 90px 20px;
+  }
+
+  @media screen and (max-width: 500px) {
+    padding: 90px 0px;
+  }
+`;
+
+export const LineGraphContainer = styled.div`
+  background-color: ${theme.colors.background.primary};
+  color: ${theme.colors.text.primary};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  height: 100%;
+  width: 100%;
+
+  @media screen and (max-width: 1050px) {
+    height: 80%;
+  }
+
+  @media screen and (max-width: 500px) {
+    height: 70%;
+    width: 90%;
+  }
 `;
