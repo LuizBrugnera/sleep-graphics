@@ -11,14 +11,15 @@ export interface UpdateSleepDataDTO {
 }
 
 export interface SleepDataDTO {
-  id: string;
+  _id: string;
   sleepTime: string;
   date: string;
   name: string;
 }
 
 export interface SleepDataAllPersonsDTO {
-  id: string;
+  _id: string;
+  [key: string]: string | number;
   sleepTimeEverson: string;
   sleepTimeGabriel: string;
   sleepTimeHenrique: string;

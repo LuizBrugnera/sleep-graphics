@@ -9,12 +9,34 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { SleepDataAllPersonsDTO } from "./dto/SleepDataDto";
+import { useEffect, useState } from "react";
 
 interface SleepTimeLineChartProps {
   sleepData: SleepDataAllPersonsDTO[];
 }
 
 const SleepTimeLineChart = ({ sleepData }: SleepTimeLineChartProps) => {
+  const [maxValue, setMaxValue] = useState(0);
+
+  const getMaxValue = (data: SleepDataAllPersonsDTO[]) => {
+    let max = 0;
+    data.forEach((item) => {
+      Object.keys(item).forEach((key) => {
+        if (key.startsWith("sleepTime")) {
+          const sleepTime = Number(item[key as keyof SleepDataAllPersonsDTO]);
+          if (sleepTime > max) {
+            max = sleepTime;
+          }
+        }
+      });
+    });
+    return max;
+  };
+
+  useEffect(() => {
+    setMaxValue(getMaxValue(sleepData));
+  }, [sleepData]);
+
   return (
     <ResponsiveContainer width="100%" height="100%">
       <LineChart
@@ -28,7 +50,7 @@ const SleepTimeLineChart = ({ sleepData }: SleepTimeLineChartProps) => {
       >
         <CartesianGrid strokeDasharray="10 10" />
         <XAxis dataKey="date" />
-        <YAxis />
+        <YAxis domain={[0, maxValue + 1]} />
         <Tooltip />
         <Legend />
         <Line
@@ -36,7 +58,6 @@ const SleepTimeLineChart = ({ sleepData }: SleepTimeLineChartProps) => {
           dataKey="sleepTimeGabriel"
           name="Gabriel"
           stroke="#8884d8"
-          activeDot={{ r: 8 }}
         />
         <Line
           type="monotone"

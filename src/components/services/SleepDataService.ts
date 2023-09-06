@@ -12,12 +12,12 @@ export const SleepDataService = {
   ): Promise<SleepDataDTO | undefined> => {
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/sleepdata`,
+        `http://localhost:3005/api/v1/sleepdata`,
         data
       );
 
       const sleepData: SleepDataDTO = {
-        id: response.data.id,
+        _id: response.data.id,
         date: response.data.date,
         sleepTime: response.data.sleepTime,
         name: response.data.name,
@@ -25,14 +25,14 @@ export const SleepDataService = {
 
       return sleepData;
     } catch (error) {
-      console.error("Erro ao criar post", error);
+      console.error("Erro to create SleepData", error);
     }
   },
 
   getAll: async (): Promise<SleepDataDTO[] | undefined> => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/sleepdata`
+        `http://localhost:3005/api/v1/sleepdata`
       );
 
       const sleepDataList: SleepDataDTO[] = response.data.map(
@@ -48,18 +48,18 @@ export const SleepDataService = {
 
       return sleepDataList;
     } catch (error) {
-      console.error("Erro ao obter sleepdata", error);
+      console.error("Erro to get sleepdata", error);
     }
   },
 
   getOne: async (id: string): Promise<SleepDataDTO | undefined> => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/sleepdata/${id}`
+        `http://localhost:3005/api/v1/sleepdata/${id}`
       );
 
       const sleepData: SleepDataDTO = {
-        id: response.data.id,
+        _id: response.data.id,
         date: response.data.date,
         sleepTime: response.data.sleepTime,
         name: response.data.name,
@@ -67,7 +67,7 @@ export const SleepDataService = {
 
       return sleepData;
     } catch (error) {
-      console.error("Erro ao obter post", error);
+      console.error("Erro to get one sleepdata", error);
     }
   },
 
@@ -77,12 +77,12 @@ export const SleepDataService = {
   ): Promise<SleepDataDTO | undefined> => {
     try {
       const response = await axios.put(
-        `${process.env.REACT_APP_API_URL}/sleepdata/${id}`,
+        `http://localhost:3005/api/v1/sleepdata/${id}`,
         data
       );
 
       const sleepData: SleepDataDTO = {
-        id: response.data.id,
+        _id: response.data.id,
         date: response.data.date,
         sleepTime: response.data.sleepTime,
         name: response.data.name,
@@ -90,14 +90,14 @@ export const SleepDataService = {
 
       return sleepData;
     } catch (error) {
-      console.error("Erro ao atualizar post", error);
+      console.error("Erro to update post", error);
     }
   },
 
   delete: async (id: string): Promise<boolean | undefined> => {
     try {
       const response = await axios.delete(
-        `${process.env.REACT_APP_API_URL}/sleepdata/${id}`
+        `http://localhost:3005/api/v1/sleepdata/${id}`
       );
 
       return response.status === 200 ? true : false;
@@ -106,12 +106,12 @@ export const SleepDataService = {
     }
   },
 
-  getSleepDataByName: async (): Promise<
+  getGroupedSleepData: async (): Promise<
     SleepDataAllPersonsDTO[] | undefined
   > => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/sleepdata/${name}`
+        `http://localhost:3005/api/v1/sleepdata/grouped`
       );
 
       const sleepDataList: SleepDataAllPersonsDTO[] =
@@ -133,7 +133,7 @@ export const SleepDataService = {
 
       return sleepDataList;
     } catch (error) {
-      console.error("Erro ao obter sleepdata", error);
+      console.error("Erro to get grouped sleepdata", error);
     }
   },
 };

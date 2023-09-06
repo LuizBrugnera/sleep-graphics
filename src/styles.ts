@@ -19,7 +19,6 @@ export const theme = {
 };
 
 export const GlobalStyles = createGlobalStyle`
-
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -55,6 +54,36 @@ a {
 ul {
    list-style: none;
 }
+
+.react-datepicker-wrapper {
+    width: 300px;
+}
+
+
+
+.react-datepicker__input-container input {
+    width: 300px;
+    height: 50px;
+    text-align: center;
+    font-size: 1.2rem;
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    color: ${theme.colors.text.primary};
+    background-color: ${theme.colors.background.secondary};
+}
+
+@media screen and (max-width: 500px) {
+  .react-datepicker__input-container input {
+    width: 200px;
+    height: 30px;
+    font-size: 1rem;
+  }
+
+  .react-datepicker-wrapper {
+    width: 200px;
+}
+
+}
+
 `;
 
 // NavBar
@@ -163,7 +192,7 @@ export const MobileAncor = styled.a`
 `;
 // home
 
-export const HomeContainer = styled.div`
+export const MainContainer = styled.div`
   background-color: ${theme.colors.background.primary};
   color: ${theme.colors.text.primary};
   display: flex;
@@ -327,4 +356,41 @@ export const WarningMessage = styled.p<WarningMessageProps>`
     props.typeMessage == "error"
       ? theme.colors.text.warning
       : theme.colors.text.sucess};
+`;
+
+/// ranking
+
+export const Title = styled.h1`
+  font-size: 2rem;
+  font-weight: 600;
+  transition: all 0.3s ease-in-out;
+  margin: 20px 0px;
+`;
+
+export const SubTitle = styled.h2`
+  font-size: 1.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease-in-out;
+  margin: 50px 0px;
+`;
+
+export const VerticalContainer = styled.div`
+  background-color: ${theme.colors.background.primary};
+  color: ${theme.colors.text.primary};
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const Footer = styled.footer`
+  background-color: ${theme.colors.background.primary};
+  color: ${theme.colors.text.primary};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  height: 10vh;
+  width: 100%;
+  margin-top: 100px;
 `;

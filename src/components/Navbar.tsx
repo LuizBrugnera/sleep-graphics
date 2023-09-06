@@ -39,9 +39,6 @@ const Navbar = () => {
               <S.MobileNavItem>
                 <S.MobileAncor href="/graphs">Graficos do Sono</S.MobileAncor>
               </S.MobileNavItem>
-              <S.MobileNavItem>
-                <S.MobileAncor href="/ranking">Ranking</S.MobileAncor>
-              </S.MobileNavItem>
             </S.MobileNavList>
           )}
         </>
@@ -52,9 +49,6 @@ const Navbar = () => {
           </S.NavItem>
           <S.NavItem>
             <a href="/graphs">Graficos do Sono</a>
-          </S.NavItem>
-          <S.NavItem>
-            <a href="/ranking">Ranking</a>
           </S.NavItem>
         </S.NavList>
       )}

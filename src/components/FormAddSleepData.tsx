@@ -2,6 +2,8 @@ import React, { FormEvent, useState } from "react";
 import * as S from "../styles";
 import { SleepDataService } from "./services/SleepDataService";
 import { SleepDataAllPersonsDTO } from "./dto/SleepDataDto";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 type FormAddSleepDataProps = {
   setSleepData: React.Dispatch<React.SetStateAction<SleepDataAllPersonsDTO[]>>;
@@ -9,9 +11,17 @@ type FormAddSleepDataProps = {
 
 const FormAddSleepData = ({ setSleepData }: FormAddSleepDataProps) => {
   const [sleepTime, setSleepTime] = useState("");
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState<Date | null>(null);
   const [message, setMessage] = useState({ text: "", type: "" });
   const [name, setName] = useState("undefined");
+
+  function formatDate(date: Date): string {
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0"); // Os meses são de 0 a 11, então acrescentamos +1 para ficar correto
+    const year = date.getFullYear();
+
+    return `${day}-${month}-${year}`;
+  }
 
   const valid = () => {
     if (name === "undefined") {
@@ -21,7 +31,7 @@ const FormAddSleepData = ({ setSleepData }: FormAddSleepDataProps) => {
       });
       return false;
     }
-    if (date === "") {
+    if (date === null) {
       setMessage({ text: "Escolha a data!", type: "error" });
       return false;
     }
@@ -47,16 +57,18 @@ const FormAddSleepData = ({ setSleepData }: FormAddSleepDataProps) => {
     if (valid()) {
       const data = await SleepDataService.create({
         name,
-        date,
+        date: formatDate(date!),
         sleepTime,
       });
-
       if (data) {
         setMessage({ text: "Dados adicionados com sucesso!", type: "sucess" });
-        const DataList = await SleepDataService.getSleepDataByName();
+        const DataList = await SleepDataService.getGroupedSleepData();
         if (DataList) {
           setSleepData(DataList);
         }
+        setName("undefined");
+        setDate(null);
+        setSleepTime("");
       } else {
         setMessage({
           text: "Erro ao adicionar os dados, tente novamente!",
@@ -89,17 +101,16 @@ const FormAddSleepData = ({ setSleepData }: FormAddSleepDataProps) => {
           <option value="Robson">Robson</option>
         </S.FormSelect>
         <S.FormLabel htmlFor="date">Data</S.FormLabel>
-        <S.FormInput
-          type="date"
-          name="date"
-          id="date"
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setDate(e.target.value)
-          }
+        <DatePicker
+          selected={date}
+          onChange={(date) => setDate(date)}
+          dateFormat={"dd-MM-yyyy"}
+          maxDate={new Date()}
         />
+
         <S.FormLabel htmlFor="sleepTime">Tempo de Sono</S.FormLabel>
         <S.FormInput
-          type="string"
+          type="text"
           name="sleepTime"
           id="sleepTime"
           placeholder="no formato 0:00"
