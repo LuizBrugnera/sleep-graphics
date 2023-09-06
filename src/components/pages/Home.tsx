@@ -3,6 +3,7 @@ import { SleepDataAllPersonsDTO } from "../dto/SleepDataDto";
 import * as S from "../../styles";
 //import FormAddSleepData from "../FormAddSleepData";
 import SleepTimeLineChart from "../SleepTimeLineChart";
+import FormAddSleepData from "../FormAddSleepData";
 
 const Home = () => {
   const [sleepData, setSleepData] = useState([] as SleepDataAllPersonsDTO[]);
@@ -65,6 +66,7 @@ const Home = () => {
         <S.LineGraphContainer>
           <SleepTimeLineChart sleepData={sleepData} />
         </S.LineGraphContainer>
+        <FormAddSleepData />
       </S.HomeContainer>
     </div>
   );

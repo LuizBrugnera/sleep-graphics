@@ -9,9 +9,11 @@ export const theme = {
       secondary: "#302d2d",
       tertiary: "rgba(255, 255, 255, 0.87)",
     },
-  text: {
-    primary: "rgba(255, 255, 255, 0.87)",
-    secondary: "#ffffff",
+    text: {
+      primary: "rgba(255, 255, 255, 0.87)",
+      secondary: "#ffffff",
+      warning: "#ff0000",
+      sucess: "#00ff00",
     },
   },
 };
@@ -198,4 +200,131 @@ export const LineGraphContainer = styled.div`
     height: 70%;
     width: 90%;
   }
+`;
+
+// formAdd
+
+export const FormTitle = styled.h1`
+  font-size: 2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  margin: 20px 0px;
+
+  @media screen and (max-width: 500px) {
+    font-size: 1.5rem;
+  }
+`;
+
+export const FormContainer = styled.div`
+  background-color: ${theme.colors.background.primary};
+  color: ${theme.colors.text.primary};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  height: 500px;
+  width: 100%;
+  margin-top: 100px;
+`;
+
+export const Form = styled.form`
+  background-color: ${theme.colors.background.primary};
+  color: ${theme.colors.text.primary};
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: 100%;
+  width: 100%;
+`;
+
+export const FormInput = styled.input`
+  background-color: ${theme.colors.background.secondary};
+  color: ${theme.colors.text.primary};
+  display: flex;
+  text-align: center;
+  border-radius: 5px;
+
+  font-size: 1.2rem;
+  margin: 5px 0px;
+  width: 300px;
+  height: 50px;
+
+  @media screen and (max-width: 500px) {
+    margin: 5px 0px;
+    width: 200px;
+    height: 30px;
+    font-size: 1rem;
+  }
+`;
+
+export const FormLabel = styled.label`
+  background-color: ${theme.colors.background.primary};
+  color: ${theme.colors.text.primary};
+  display: flex;
+  margin: 10px 0px;
+
+  font-size: 1.2rem;
+  font-weight: 600;
+
+  @media screen and (max-width: 500px) {
+    font-size: 1rem;
+  }
+`;
+
+export const FormButton = styled.button`
+  background-color: ${theme.colors.background.secondary};
+  color: ${theme.colors.text.primary};
+
+  margin: 20px 0px;
+  padding: 20px 40px;
+  border: 1px solid ${theme.colors.background.tertiary};
+  border-radius: 5px;
+
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  font-size: 1.5rem;
+  font-weight: 600;
+
+  &:active {
+    background-color: ${theme.colors.background.tertiary};
+    color: ${theme.colors.text.secondary};
+    transition: all 0.3s ease-in-out;
+  }
+
+  @media screen and (max-width: 500px) {
+    font-size: 1rem;
+    margin: 10px 0px;
+    padding: 10px 20px;
+    border-radius: 5px;
+  }
+`;
+
+export const FormSelect = styled.select`
+  background-color: ${theme.colors.background.secondary};
+  color: ${theme.colors.text.primary};
+  width: 300px;
+  height: 50px;
+  text-align: center;
+  font-size: 1.2rem;
+  @media screen and (max-width: 500px) {
+    padding: 5px 10px;
+    border-radius: 5px;
+    width: 200px;
+    height: 30px;
+    font-size: 1rem;
+  }
+`;
+
+interface WarningMessageProps {
+  typeMessage: string;
+}
+
+export const WarningMessage = styled.p<WarningMessageProps>`
+  background-color: ${theme.colors.background.primary};
+  color: ${(props) =>
+    props.typeMessage == "error"
+      ? theme.colors.text.warning
+      : theme.colors.text.sucess};
 `;
