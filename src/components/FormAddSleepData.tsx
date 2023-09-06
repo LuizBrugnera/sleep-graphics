@@ -1,8 +1,13 @@
 import React, { FormEvent, useState } from "react";
 import * as S from "../styles";
 import { SleepDataService } from "./services/SleepDataService";
+import { SleepDataAllPersonsDTO } from "./dto/SleepDataDto";
 
-const FormAddSleepData = () => {
+type FormAddSleepDataProps = {
+  setSleepData: React.Dispatch<React.SetStateAction<SleepDataAllPersonsDTO[]>>;
+};
+
+const FormAddSleepData = ({ setSleepData }: FormAddSleepDataProps) => {
   const [sleepTime, setSleepTime] = useState("");
   const [date, setDate] = useState("");
   const [message, setMessage] = useState({ text: "", type: "" });
@@ -48,6 +53,10 @@ const FormAddSleepData = () => {
 
       if (data) {
         setMessage({ text: "Dados adicionados com sucesso!", type: "sucess" });
+        const DataList = await SleepDataService.getSleepDataByName();
+        if (DataList) {
+          setSleepData(DataList);
+        }
       } else {
         setMessage({
           text: "Erro ao adicionar os dados, tente novamente!",

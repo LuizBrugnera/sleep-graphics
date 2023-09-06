@@ -66,7 +66,7 @@ const Home = () => {
         <S.LineGraphContainer>
           <SleepTimeLineChart sleepData={sleepData} />
         </S.LineGraphContainer>
-        <FormAddSleepData />
+        <FormAddSleepData setSleepData={setSleepData} />
       </S.HomeContainer>
     </div>
   );
