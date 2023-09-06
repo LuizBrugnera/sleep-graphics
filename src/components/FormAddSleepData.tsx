@@ -14,6 +14,7 @@ const FormAddSleepData = ({ setSleepData }: FormAddSleepDataProps) => {
   const [date, setDate] = useState<Date | null>(null);
   const [message, setMessage] = useState({ text: "", type: "" });
   const [name, setName] = useState("undefined");
+  const [password, setPassword] = useState("");
 
   function formatDate(date: Date): string {
     const day = String(date.getDate()).padStart(2, "0");
@@ -39,6 +40,10 @@ const FormAddSleepData = ({ setSleepData }: FormAddSleepDataProps) => {
       setMessage({ text: "Escolha o tempo de sono!", type: "error" });
       return false;
     }
+    if (password === "") {
+      setMessage({ text: "Digite a senha", type: "error" });
+      return false;
+    }
 
     const isValid = /^([0-9]{1,2}|1[0-9]|2[0-3]):[0-5][0-9]$/.test(sleepTime);
     if (!isValid) {
@@ -59,8 +64,15 @@ const FormAddSleepData = ({ setSleepData }: FormAddSleepDataProps) => {
         name,
         date: formatDate(date!),
         sleepTime,
+        password,
       });
-      if (data) {
+      if (data === undefined) {
+        setMessage({
+          text: "Senha incorreta!",
+          type: "error",
+        });
+        return;
+      } else if (data) {
         setMessage({ text: "Dados adicionados com sucesso!", type: "sucess" });
         const DataList = await SleepDataService.getGroupedSleepData();
         if (DataList) {
@@ -119,6 +131,19 @@ const FormAddSleepData = ({ setSleepData }: FormAddSleepDataProps) => {
             setSleepTime(e.target.value)
           }
         />
+
+        <S.FormLabel htmlFor="password">Senha</S.FormLabel>
+        <S.FormInput
+          type="text"
+          name="password"
+          id="password"
+          placeholder="Digite a senha"
+          value={password}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setPassword(e.target.value)
+          }
+        />
+
         <S.WarningMessage typeMessage={message.type}>
           {message.text}
         </S.WarningMessage>

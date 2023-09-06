@@ -255,7 +255,7 @@ export const FormContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  height: 500px;
+  height: 700px;
   width: 100%;
   margin-top: 100px;
 `;

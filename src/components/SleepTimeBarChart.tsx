@@ -36,6 +36,11 @@ export function SleepTimeBarChart({ sleepData, type }: SleepBarChartProps) {
       return { name: name.replace("sleepTime", ""), all };
     });
 
+    allSleep.push({
+      name: "Humano",
+      all: 8 * sleepData.length,
+    });
+
     allSleep.sort((a, b) => b.all - a.all);
     return allSleep;
   };

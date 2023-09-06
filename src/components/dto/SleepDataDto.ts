@@ -2,12 +2,14 @@ export interface CreateSleepDataDTO {
   sleepTime: string;
   date: string;
   name: string;
+  password: string;
 }
 
 export interface UpdateSleepDataDTO {
   sleepTime?: string;
   date?: string;
   name?: string;
+  password: string;
 }
 
 export interface SleepDataDTO {

@@ -16,6 +16,8 @@ export const SleepDataService = {
         data
       );
 
+      if (response.status === 403) return undefined;
+
       const sleepData: SleepDataDTO = {
         _id: response.data.id,
         date: response.data.date,
