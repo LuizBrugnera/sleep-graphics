@@ -10,6 +10,8 @@ type FormAddSleepDataProps = {
 };
 
 const FormAddSleepData = ({ setSleepData }: FormAddSleepDataProps) => {
+  const [pressed, setPressed] = useState(false);
+
   const [sleepTime, setSleepTime] = useState("");
   const [date, setDate] = useState<Date | null>(null);
   const [message, setMessage] = useState({ text: "", type: "" });
@@ -59,33 +61,43 @@ const FormAddSleepData = ({ setSleepData }: FormAddSleepDataProps) => {
 
   const handleButton = async (event: FormEvent) => {
     event.preventDefault();
-    if (valid()) {
-      const data = await SleepDataService.create({
-        name,
-        date: formatDate(date!),
-        sleepTime,
-        password,
-      });
-      if (data === undefined) {
-        setMessage({
-          text: "Senha incorreta!",
-          type: "error",
+    if (!pressed) {
+      if (valid()) {
+        setPressed(true);
+        const data = await SleepDataService.create({
+          name,
+          date: formatDate(date!),
+          sleepTime,
+          password,
         });
-        return;
-      } else if (data) {
-        setMessage({ text: "Dados adicionados com sucesso!", type: "sucess" });
-        const DataList = await SleepDataService.getGroupedSleepData();
-        if (DataList) {
-          setSleepData(DataList);
+        if (data === undefined) {
+          setMessage({
+            text: "Senha incorreta!",
+            type: "error",
+          });
+          return;
+        } else if (data) {
+          setMessage({
+            text: "Dados adicionados com sucesso!",
+            type: "sucess",
+          });
+          const DataList = await SleepDataService.getGroupedSleepData();
+          if (DataList) {
+            setSleepData(DataList);
+          }
+          setName("undefined");
+          setDate(null);
+          setSleepTime("");
+          setTimeout(() => {
+            setPressed(false);
+            setMessage({ text: "", type: "" });
+          }, 3000);
+        } else {
+          setMessage({
+            text: "Erro ao adicionar os dados, tente novamente!",
+            type: "error",
+          });
         }
-        setName("undefined");
-        setDate(null);
-        setSleepTime("");
-      } else {
-        setMessage({
-          text: "Erro ao adicionar os dados, tente novamente!",
-          type: "error",
-        });
       }
     }
   };
@@ -147,7 +159,9 @@ const FormAddSleepData = ({ setSleepData }: FormAddSleepDataProps) => {
         <S.WarningMessage typeMessage={message.type}>
           {message.text}
         </S.WarningMessage>
-        <S.FormButton onClick={handleButton}>Adicionar</S.FormButton>
+        <S.FormButton onClick={handleButton} pressed={pressed}>
+          Adicionar
+        </S.FormButton>
       </S.Form>
     </S.FormContainer>
   );

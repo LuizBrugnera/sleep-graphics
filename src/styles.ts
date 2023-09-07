@@ -305,7 +305,11 @@ export const FormLabel = styled.label`
   }
 `;
 
-export const FormButton = styled.button`
+interface FormButtonProps {
+  pressed?: boolean;
+}
+
+export const FormButton = styled.button<FormButtonProps>`
   background-color: ${theme.colors.background.secondary};
   color: ${theme.colors.text.primary};
 
@@ -319,10 +323,20 @@ export const FormButton = styled.button`
   font-size: 1.5rem;
   font-weight: 600;
 
+  ${(props) =>
+    props.pressed
+      ? `
+      background-color: ${theme.colors.background.tertiary};
+      color: ${theme.colors.text.secondary};
+      `
+      : `
+      background-color: ${theme.colors.background.secondary};
+      color: ${theme.colors.text.primary};
+         `};
+
   &:active {
     background-color: ${theme.colors.background.tertiary};
     color: ${theme.colors.text.secondary};
-    transition: all 0.3s ease-in-out;
   }
 
   @media screen and (max-width: 500px) {
