@@ -91,7 +91,7 @@ const FormAddSleepData = ({ setSleepData }: FormAddSleepDataProps) => {
           setTimeout(() => {
             setPressed(false);
             setMessage({ text: "", type: "" });
-          }, 3000);
+          }, 1500);
         } else {
           setMessage({
             text: "Erro ao adicionar os dados, tente novamente!",
